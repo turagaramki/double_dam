@@ -15,10 +15,10 @@ from _db_geometry import DamBreak2DGeometry
 from pysph.solver.application import Application
 from pysph.sph.scheme import WCSPHScheme
 
-fluid_column_height = 2.0
-fluid_column_width = 1.0
-container_height = 4.0
-container_width = 4.0
+fluid_column_height = 0.6
+fluid_column_width = 2*fluid_column_height
+container_height = 5.366*fluid_column_height
+container_width = 5.366*fluid_column_height
 nboundary_layers = 2
 #h = 0.0156
 h = 0.039
@@ -49,7 +49,7 @@ class DamBreak2D(Application):
     def configure_scheme(self):
         self.scheme.configure(h0=self.h, hdx=self.hdx)
         kernel = WendlandQuintic(dim=2)
-        tf = 2.5
+        tf = 4.0
         from pysph.sph.integrator import EPECIntegrator
         self.scheme.configure_solver(
             kernel=kernel,
@@ -73,7 +73,7 @@ class DamBreak2D(Application):
             fluid_column_height=fluid_column_height,
             fluid_column_width=fluid_column_width, dx=self.dx, dy=self.dx,
             nboundary_layers=1, ro=ro, co=co,
-            with_obstacle=False,double_dam=True,
+            with_obstacle=False,double_dam=False,
             beta=1.0, nfluid_offset=1, hdx=self.hdx)
         return geom.create_particles()
 

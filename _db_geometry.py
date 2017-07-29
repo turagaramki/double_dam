@@ -221,7 +221,7 @@ class DamBreak2DGeometry(object):
         if not self.iisph:
             boundary.rho0[:] = ro
 
-        fluidl.append_parray( fluidr)
+        # fluidl.append_parray( fluidr)
 
         # create the particles list
         particles = [fluidl, boundary]
